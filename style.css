@@ -1,0 +1,287 @@
+/* Grundstil för hela sidan. Border-box gör att padding och kantlinjer
+   räknas in i elementens bredd, så att rutorna inte blir bredare än tänkt. */
+* {
+    box-sizing: border-box;
+}
+
+/* Sidans standardtypsnitt och radavstånd. Rubrikerna får eget typsnitt nedan. */
+body {
+    background-size: contain;
+    font-family: "Trebuchet MS", Arial, sans-serif;
+    line-height: 1.6;
+}
+
+/* Gemensamt utseende för huvudrubriken, receptnamnen och underrubrikerna. */
+h1, h2, h3, h4 {
+    font-family: Georgia, "Times New Roman", serif;
+    line-height: 1.2;
+}
+
+/* Grundavstånd inuti stycken. Hero, recept och footer har egna undantag längre ned. */
+p {
+    padding: 0.5cm;
+}
+
+/* Sidlayout: menyn får en kolumn på 200px och innehållet tar resten av bredden.
+   Mellan kolumnerna finns 30px luft. Minmax tillåter innehållskolumnen att krympa. */
+.layout {
+    display: grid;
+    grid-template-columns: 200px minmax(0, 1fr);
+    gap: 30px;
+}
+
+/* Sidhuvudet högst upp: bakgrundsbilden fyller ytan och kan beskäras.
+   Ett genomskinligt rosa lager gör rubriken lättare att läsa.
+   Padding ger höjd och luft runt rubriken. */
+header {
+    background-color: pink;
+    background-image: linear-gradient(rgb(255 240 245 / 80%), rgb(255 240 245 / 80%)), url("Images/headerimg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 150px 20px;
+    text-align: center;
+}
+
+/* Huvudrubrikens färg och kursiva stil. Clamp anpassar textstorleken
+   efter fönstrets bredd, men håller den mellan 2rem och 4rem. */
+header h1 {
+    margin: 0;
+    color: #613247;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-style: italic;
+    font-weight: normal;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 0 rgb(255 255 255 / 50%);
+}
+
+/* Dekorativ linje under huvudrubriken. Den skapas i CSS, inte som extra HTML. */
+header h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    margin: 20px auto 0;
+    background-color: #92566b;
+    border-radius: 3px;
+}
+
+/* Receptmenyn: en ljus ruta med rundade hörn och skugga.
+   Align-self hindrar rutan från att sträckas längs hela receptsamlingen. */
+nav {
+    align-self: start;
+    margin-top: 24px;
+    padding: 24px 16px;
+    background: #fff5f7;
+    border: 1px solid #efd5de;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgb(56 35 43 / 8%);
+}
+
+/* Menyns rubrik centreras och får luft ned till receptlänkarna. */
+nav h3 {
+    margin: 0 0 24px;
+    color: #38232b;
+    text-align: center;
+}
+
+/* Avstånd mellan menyvalen, men ingen extra marginal efter det sista valet. */
+nav li {
+    margin-bottom: 15px;
+}
+
+nav li:last-child {
+    margin-bottom: 0;
+}
+
+/* Tar bort listpunkter och listans standardindrag i receptmenyn. */
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Receptlänkarna ser ut som knappar, men fungerar fortfarande som länkar
+   till receptens id:n. Display block gör hela knappytan klickbar. */
+nav a {
+    display: block;
+    padding: 10px;
+    background-color: pink;
+    color: #38232b;
+    border: 1px solid #92566b;
+    border-radius: 8px;
+    text-align: center;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Menyknappens färg ändras när muspekaren ligger över den. */
+nav a:hover {
+    background-color: #f4a6bc;
+}
+
+/* En tydlig ram visar vilken menylänk som är vald vid tangentbordsnavigering. */
+nav a:focus-visible {
+    outline: 3px solid #38232b;
+    outline-offset: 3px;
+}
+/* Gemensamma bildregler: bilder i innehållet får inte bli bredare än sin behållare.
+   Automatisk höjd bevarar bildens proportioner om inget annat format anges. */
+.innehall img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Introduktionsbilden och receptbilderna visas i formatet 3:2.
+   Cover beskär vid behov i stället för att sträcka eller förvränga bilderna. */
+.recept img,
+.hero img {
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+}
+
+/* Introduktionen ovanför recepten: texten får tre delar av bredden och bilden två.
+   Text och bild centreras lodrätt, med luft mellan sig och ned till första receptet. */
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: center;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+/* Introduktionens stycken slipper den generella paddingen för p. */
+.hero-text p {
+    padding: 0;
+    line-height: 1.6;
+}
+
+/* Tar bort standardmarginalen runt introduktionsbilden och dess bildkälla. */
+.hero figure {
+    margin: 0;
+}
+
+/* Introduktionsbilden fyller sin kolumn och får rundade hörn samt egna marginaler. */
+.hero img {
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    margin-right: 20px;
+    border-radius: 12px;
+}
+
+/* Bildkällan under introduktionsbilden visas mindre och med lite luft ovanför. */
+.hero figcaption {
+    margin-top: 8px;
+    font-size: 0.85rem;
+}
+
+/* Gemensam receptruta: rosa bakgrund, rundade hörn och 32px luft innanför kanten.
+   Grundlayouten har text till vänster och bild till höger. Margin-bottom
+   skapar mellanrum mellan de rosa rutorna. */
+.recept {
+    display: grid;
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    column-gap: 30px;
+    background-color: pink;
+    padding: 32px;
+    margin-bottom: 30px;
+    border-radius: 12px;
+}
+
+/* Receptets rubrik, beskrivning, ingredienser och instruktioner placeras
+   i textkolumnen. Min-width gör att innehållet kan krympa med kolumnen. */
+.recept h2,
+.recept p,
+.recept section {
+    grid-column: 1;
+    min-width: 0;
+}
+
+/* Tar bort standardpadding på stycken direkt i receptrutan. */
+.recept > p {
+    padding: 0;
+}
+
+/* Bild och bildkälla placeras överst i högra kolumnen och spänner över
+   textens fem rader: rubrik, två stycken och två receptsektioner.
+   Tecknet > väljer en figure som ligger direkt inuti receptrutan. */
+.recept > figure {
+    grid-column: 2;
+    grid-row: 1 / span 5;
+    align-self: start;
+    margin: 0;
+    min-width: 0;
+}
+
+/* Receptbilderna fyller bildkolumnen och får rundade hörn. */
+.recept img {
+    display: block;
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Mindre text och ett litet avstånd mellan receptbilden och dess bildkälla. */
+.recept figcaption {
+    margin-top: 8px;
+    font-size: 0.85rem;
+}
+
+/* Extra klass på Drömmar, Hallongrottor, Schackrutor och Hästskor.
+   Dessa recept får bilden till vänster: två delar bild och tre delar text. */
+.bild-vanster {
+    grid-template-columns: 2fr 3fr;
+}
+
+/* Flyttar textinnehållet till högra kolumnen i recept med bild-vanster. */
+.bild-vanster h2,
+.bild-vanster p,
+.bild-vanster section {
+    grid-column: 2;
+}
+
+/* Flyttar bilden och bildkällan till vänstra kolumnen i samma recept. */
+.bild-vanster figure {
+    grid-column: 1;
+}
+
+/* Sidfoten efter recepten: centrerad text i en ljus, rundad ruta.
+   Gap styr avståndet mellan styckena och padding ger luft runt innehållet. */
+footer { 
+    text-align: center;
+    display: grid;
+    gap: 12px;
+    padding: 20px;
+    margin: 1px;
+    background-color: #fff5f7;
+    border: 1px solid #efd5de;
+    border-radius: 18px;
+    box-shadow: 0 4px 14px rgb(56 35 43 / 8%);
+}
+
+/* Nollställer styckenas egna avstånd i sidfoten, så att footer styr mellanrummen. */
+.footer p {
+    padding: 0;
+    margin: 0;
+}
+
+/* Vid högst 700px fönsterbredd får sidan en enda kolumn.
+   Menyn hamnar ovanför innehållet och bilderna staplas med recepttexten. */
+@media (max-width: 700px) {
+    .layout,
+    .hero,
+    .recept,
+    .bild-vanster {
+        grid-template-columns: 1fr;
+    }
+
+    /* Återställer receptens kolumn- och radplacering, även för bild-vanster,
+       så att delarna visas i HTML-ordning utan tomma bildkolumner. */
+    .recept h2,
+    .recept p,
+    .recept section,
+    .recept figure {
+        grid-column: 1;
+        grid-row: auto;
+    }
+}
