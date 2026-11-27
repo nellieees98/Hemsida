@@ -1,4 +1,4 @@
-/* Grundstil för hela sidan. Border-box gör att padding och kantlinjer
+2/* Grundstil för hela sidan. Border-box gör att padding och kantlinjer
    räknas in i elementens bredd, så att rutorna inte blir bredare än tänkt. */
 * {
     box-sizing: border-box;
