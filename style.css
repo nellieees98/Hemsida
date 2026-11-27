@@ -80,7 +80,7 @@ nav {
 
 /* Menyns rubrik centreras och får luft ned till receptlänkarna. */
 nav h2 {
-    font-size: 1rem;
+    font-size: 1.3rem;
     margin: 0 0 24px;
     color: #38232b;
     text-align: center;
@@ -149,6 +149,7 @@ nav a:focus-visible {
     align-items: center;
     gap: 30px;
     margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 /* Introduktionens stycken slipper den generella paddingen för p. */
