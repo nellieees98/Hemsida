@@ -79,7 +79,8 @@ nav {
 }
 
 /* Menyns rubrik centreras och får luft ned till receptlänkarna. */
-nav h3 {
+nav h2 {
+    font-size: 1rem;
     margin: 0 0 24px;
     color: #38232b;
     text-align: center;
